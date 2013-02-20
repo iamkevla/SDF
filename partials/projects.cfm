@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=iso-8859-2" />
-	<meta name="author" content="Kevin Vlahos" />
-	<title>SDF - Projects</title>
-	<link rel="stylesheet" href="stylesheet.css" type="text/css" />
-	<script language="javascript">
-		function giveFocus(){
-			document.getElementById('Project').focus();
-		}
-	</script>
-	
-</head>
-<body onLoad="giveFocus()" >
-	<div id="content">
-		
-		<cfinclude template="header.cfm">
-	
-		<cfinclude template="menu.cfm">
-	
-	<!---div class="padding">
-		<h2 align="right"><span class="green">PROJECTS</span></h2>
-	</div--->
-	<br />	
+<br />	
 	
 	<cfstoredproc datasource="#ds#" procedure="ap_getProjects">
 		<cfprocresult name="Projects">
@@ -111,9 +87,3 @@
 			</td>
 		</tr>	
 	</table>
-	
-	<cfinclude template="footer.cfm">
-
-</div>
-</body>
-</html>

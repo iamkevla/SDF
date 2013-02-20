@@ -1,3 +1,3 @@
-Web Projects repo
+# SDF Angularized
 
-Tool for managing Software Requirements
+Tool for managing Software Requirements redone using [AngularJS]
