@@ -1,8 +1,6 @@
 <br />	
 	
-	<cfstoredproc datasource="#ds#" procedure="ap_getProjects">
-		<cfprocresult name="Projects">
-	</cfstoredproc>
+	
 	
 	
 	<!--- check if it is a request to edit --->

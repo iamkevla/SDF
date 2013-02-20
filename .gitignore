@@ -30,7 +30,11 @@ local.properties
 
 # Railo files
 WEB-INF/
-WEB-INF/*.*/*.*
+
+# Taffy Files
+taffy/
+
+
 
 
 
