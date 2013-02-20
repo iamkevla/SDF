@@ -51,7 +51,7 @@
 				<label>Project Name:&nbsp</label>
 			</td>
 			<td>	
-				<input name="Project" 
+				<input name="Project" id="Project"
 					 validate="maxlength"  
 					 maxlength="50" required="true" size="50"
 					 message="The project name is too long or is empty. Max 50 characters."

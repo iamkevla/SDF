@@ -43,7 +43,7 @@
 			<tr width="100%">
 				<td align="right">Grouping:&nbsp</td>
 				<td>
-					<input name="Group" size="50" value="#GroupName.GroupName#" >	 
+					<input name="Group" id="Group" size="50" value="#GroupName.GroupName#" >	 
 				</td>
 				</cfoutput>	
 				<cfstoredproc datasource="#ds#" procedure="ap_getProjects">

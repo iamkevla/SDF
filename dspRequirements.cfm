@@ -93,7 +93,7 @@
 		<input type="hidden" name="id" <cfif isdefined("url.id")>value="#url.id#"</cfif>>
 		</cfoutput>
 		
-				
+		
 		<cfstoredproc datasource="#ds#" procedure="ap_getRequirements">
 			<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@projectID" value="#session.projectID#">
 			<cfprocresult name="getRequirements">
@@ -152,7 +152,7 @@
 				</td>
 				<td>
 					<cfinput name="Group" type="text" Value="#Requirement.GroupName#" 
-						autosuggest="#lstGroup#" required="true" message="This is a required field..">
+						required="true" message="This is a required field..">
 				</td>
 				<!---
 				<td>
