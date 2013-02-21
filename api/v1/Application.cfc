@@ -1,6 +1,6 @@
 <cfcomponent extends="taffy.core.api">
 	<cfscript>
-		this.name = hash(getCurrentTemplatePath());
+		this.name =  'soworkflow'; //hash(getCurrentTemplatePath());
 		this.scriptProtect = false;
 		
 		// do your onApplicationStart stuff here

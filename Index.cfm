@@ -12,12 +12,12 @@
 		
 			<cfinclude template="menu.cfm">
 		
-			<div ng-view></div>
+			<div ng-view ></div>
 
 			<br>
 			<cfinclude template="footer.cfm">
 			
-		</div> <!--- content --->	
+		</div> <!--- /content --->	
 
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js" ></script>
 		<script src="js/app.js" ></script>
