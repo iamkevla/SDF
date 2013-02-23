@@ -1,28 +1,27 @@
-
-
 <input type="hidden" name="id" ng-model="model.project.id">
 <table id="capture">
 	<tr>
-		<td align="right">
-			<label>Project Name:&nbsp</label>
-			<input name="Project" id="Project"
-				 validate="maxlength"  
-				 maxlength="50" required="true" size="50"
+		<td>
+			<label>Project Name:&nbsp
+				<input validate="maxlength" maxlength="50" required="true" size="50"
 				 message="The project name is too long or is empty. Max 50 characters."
-				 mg-model="model.project.projectname" >	 
+				 ng-model="model.project.projectname" />	 
+			</label>	 
 		</td>
 		</tr>
 	<tr>	
-		<td align="right">
-			<label>Objectives:&nbsp</label>
-			<textarea id="description" name="description" maxlength="255" cols="80" ng-bind="model.project.descrition"></textarea>
+		<td>
+			<label>Objectives:&nbsp
+				<textarea maxlength="255" cols="80" ng-model="model.project.description"></textarea>
+			</label>
 		</td>
 
 	</tr>
 	<tr>
-		<td align="right">
-		<label>Parent project:&nbsp</label>
-		<select name="ParentID" ng-model="model.project.id" ng-options="project.id as project.projectname for project in model.projects" ></select>
+		<td>
+		<label>Parent project:&nbsp
+		<select ng-model="model.project.id" ng-options="project.id as project.projectname for project in model.projects" ></select>
+		</label>
 		</td>
 	</tr>
 	<tr>
@@ -31,8 +30,6 @@
 </table>	
 
 
-
-	
 <br />
 <br />
 <br />
@@ -42,8 +39,8 @@
 			<table>
 				<tr height="24" ng-repeat="project in model.projects">
 					<td width='250'>{{project.projectname}}&nbsp;</td>
-					<td><a ng-click='getProduct({{project.id}})'>edit&nbsp;&nbsp;</a></td>
-					<td><a href='actDeleteProject.cfm?id={{project.id}}'>delete</a></td>
+					<td><a ng-click='getProject(project.id)' >edit&nbsp;&nbsp;</a></td>
+					<td><a ng-click='deleteProject(project.id)'>delete</a></td>
 				</tr>
 			</table>
 		</td>
