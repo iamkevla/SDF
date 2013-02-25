@@ -9,13 +9,13 @@
 		<cfset var q = "" />
 		
 		<cfstoredproc datasource="dsSDF" procedure="ap_editProject" >
-			<cfprocparam cfsqltype="cF_SQL_INTEGER"  value="#arguments.id#" dbvarname="@id" />
-			<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.project#" dbvarname="@projectname"  />
-			<cfprocparam cfsqltype="cF_SQL_VARCHAR" dbvarname="@description" value="#arguments.description#" />
-			<cfif arguments.parentid eq "">
+			<cfprocparam cfsqltype="CF_SQL_INTEGER"  value="#arguments.id#" dbvarname="@id" />
+			<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.projectname#" dbvarname="@projectname"  />
+			<cfprocparam cfsqltype="cF_SQL_VARCHAR" value="#arguments.description#" dbvarname="@description"  />
+			<cfif arguments.parentid eq "" or arguments.parentid eq "null" >
 				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@parentid" null="true"  />
 			<cfelse>	
-				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@parentid" value="#form.parentid#" />
+				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@parentid" value="#arguments.parentid#" />
 			</cfif>
 		</cfstoredproc>
 
@@ -24,8 +24,7 @@
 	</cffunction>
 
 
-	<cffunction name="DELETE" access="public" output="false" hint="update project">
-
+	<cffunction name="DELETE" access="public" output="false" hint="delete project">
 		
 		<cfstoredproc datasource="dsSDF" procedure="ap_deleteProject" >
 			<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@id" value="#arguments.id#" > 	    

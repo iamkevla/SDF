@@ -21,8 +21,11 @@
 
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js" ></script>
 		<script src="js/app.js" ></script>
+		<script src="js/polyfill.js" ></script>
 		<script src="js/mainController.js" ></script>
 		<script src="js/groupController.js" ></script>
 	 	<script src="js/projectController.js" ></script>
+	 	<script src="js/requirementController.js" ></script>
+
 	</body>
 </html>

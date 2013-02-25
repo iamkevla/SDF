@@ -54,43 +54,23 @@ function projectCtrl( $scope, $http ){
 			'description': model.project.description,
 			'parentid': model.project.parentid
 		};
-		$http({method:'POST', url:'api/v1/index.cfm/projects', data:dataPOST })
-			.success(function(data){	
-				loadProjects();
-			}).error(function(data){ 
-				alert('submit failed') 
-			});
+
+		if (model.project.id === '' ){
+			$http({method:'POST', url:'api/v1/index.cfm/projects', data:dataPOST })
+				.success(function(data){	
+					loadProjects();
+				}).error(function(data){ 
+					alert('submit failed') 
+				});
+		} else {
+			$http({method:'PUT', url:'api/v1/index.cfm/project/'+ model.project.id, data:dataPOST })
+				.success(function(data){	
+					loadProjects();
+				}).error(function(data){ 
+					alert('update failed') 
+				});
+		}
 	};
 
 
-}
-
-if (!Array.prototype.filter)
-{
-  Array.prototype.filter = function(fun /*, thisp */)
-  {
-    "use strict";
- 
-    if (this == null)
-      throw new TypeError();
- 
-    var t = Object(this);
-    var len = t.length >>> 0;
-    if (typeof fun != "function")
-      throw new TypeError();
- 
-    var res = [];
-    var thisp = arguments[1];
-    for (var i = 0; i < len; i++)
-    {
-      if (i in t)
-      {
-        var val = t[i]; // in case fun mutates this
-        if (fun.call(thisp, val, i, t))
-          res.push(val);
-      }
-    }
- 
-    return res;
-  };
 }

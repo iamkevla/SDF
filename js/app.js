@@ -7,6 +7,6 @@ angular.module('myApp', []).
   		.when('/main', {templateUrl: 'partials/main.cfm', controller: mainCtrl})
     	.when('/groups', {templateUrl: 'partials/groups.cfm', controller: groupCtrl})
     	.when('/projects', {templateUrl: 'partials/projects.cfm', controller: projectCtrl})
-    	.when('/requirements', {templateUrl: 'partials/requirements.cfm', controller: projectCtrl})
+    	.when('/requirements', {templateUrl: 'partials/requirements.cfm', controller: requirementCtrl})
     	.otherwise({redirectTo: '/main'});
   }]);
