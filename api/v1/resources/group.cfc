@@ -23,11 +23,21 @@
 
 
 	<cffunction name="DELETE" access="public" output="false" hint="delete project">
-		
-		<cfstoredproc datasource="dsSDF" procedure="ap_deleteGroup" >
-			<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@id" value="#arguments.id#" > 	    
-		</cfstoredproc>
 
+		<cftry>
+			<cfstoredproc datasource="dsSDF" procedure="ap_deleteGroup" returncode="true" >
+				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@id" value="#arguments.id#" > 	    
+			</cfstoredproc>
+
+			<cfif cfstoredproc.statuscode eq 1 >
+				<cfreturn representationOf('').withStatus(400) />	
+			</cfif>
+
+		<cfcatch type="any" >
+			<cfreturn representationOf('').withStatus(400) />	
+		</cfcatch>
+		</cftry>
+		
 		<cfreturn representationOf('').withStatus(200) />		
 
 	</cffunction>

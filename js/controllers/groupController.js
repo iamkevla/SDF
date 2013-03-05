@@ -14,11 +14,11 @@ function groupCtrl($scope, groups){
 	}; // getGroup
 
 	$scope.deleteGroup = function(id){
-		$http({method:'DELETE', url:'api/v1/index.cfm/group/'+id}).success(function(){	
+		groups.delete(id).then(function(){	
 			groups.load(function(response){
 				model.groups = response;
 			});
-		}).error(function(data){ 
+		}, function(data){ 
 			alert('delete failed') 
 		});
 	};
@@ -33,19 +33,19 @@ function groupCtrl($scope, groups){
 		if (model.group.id === '' ){
 			groups.add(dataPOST).then(function(){
 				groups.load(function(response){
-						model.groups = response;
+					model.groups = response;
 				});
 			}, function(){  
-				alert('submit failed') 
+				alert('submit failed');
 			});
 		} else {
-			groups.update( model.group.id, data:dataPOST ).then(function(){	
-					groups.load(function(response){
-						model.groups = response;
-					});
+			groups.update( model.group.id, dataPOST ).then(function(){	
+				groups.load(function(response){
+					model.groups = response;
+				});
 			}, function(){
-				alert('update failed') 
-			})
+				alert('update failed');
+			});
 		}
 	};
 	
