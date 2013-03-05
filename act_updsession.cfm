@@ -1,1 +1,0 @@
-<cfset session.showhide = not session.showhide >

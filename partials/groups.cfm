@@ -1,29 +1,29 @@
-<input type="hidden" name="id"  ng-model="model.group.id" >
-<table id="capture">
-	<tr width="100%">
-		<td align="right">Grouping:&nbsp</td>
-		<td>
-			<input name="Group" id="Group" size="50" ng-model="model.group.groupname" >	 
-		</td>
-		<td align="right" width="25%"><label>Project:&nbsp</label></td>
-		<td>
+<form class="form-horizontal" >
+	<input type="hidden" name="id"  ng-model="model.group.id" >
+	<div class="row" >
+		<div class="control-group span5" >
+			<label class="control-label" >Grouping:&nbsp</label>
+			<div class="controls" >
+				<input name="Group" id="Group" size="50" ng-model="model.group.groupname" >	 
+			</div>
+		</div	
+		<div class="control-group span5" >	
+			<label class="control-label" >Project:&nbsp</label>
+			<div class="controls" >
 			<select name="ProjectID" ng-model="model.group.projectid">
 				<option value="" >ALL</option>	
 				<option  ng-repeat="p in model.projects" value="{{p.id}}" >{{p.projectname}}</option>
 			</select>
-		</td>
-	</tr>	
-	<tr>
-		<td colspan="4" align="right">
-			<input type="submit" name="submit" value="Submit" ng-click="submitGroup()" >
-		</td>
-	</tr>
-</table>			
+		</div>
+	</div>	
+	<div class="row" >
+		<div class="form-actions span10">
+			<input class="btn btn-primary pull-right" type="button" value="Submit"  ng-click="submitGroup()"  >
+		</div>
+	</div>
+</form>			
 	
-<br />
-<br />
-<br />
-<table id="list">
+<table class="table table-condensed table-bordered table-hover span10" >
 	<tr>
 		<th><span class="green">ID</span></th>
 		<th><span class="green">Group Name</span></th>
@@ -33,7 +33,11 @@
 		<td>{{g.id}}</td>
 		<td width="40%" >{{g.groupname}}</td>
 		<td width="40%" >{{g.projectname}}</td>
-		<td><a ng-click="getGroup(g.id)" >edit</a></td>
-		<td><a ng-click="deleteGroup(g.id)" >delete</a></td>
+		<td>
+			<div class="btn-group">
+				<a class="btn btn-small" ng-click="getGroup(g.id)"  >edit<i class="icon-edit"></i></a>
+				<a class="btn btn-small" ng-click="deleteGroup(g.id)" >delete<i class="icon-remove"></i></a>
+			</div>
+		</td>	
 	</tr>
 </table>
