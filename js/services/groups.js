@@ -1,4 +1,4 @@
-myApp.factory('groups', function( $http ){
+myApp.factory('groups', function( $http, $q ){
 	
 	var groups = {
 			load : function(callback){
@@ -14,7 +14,40 @@ myApp.factory('groups', function( $http ){
 					}); //angular.forEach
 				}); // http
 				callback(groups);
-			} // load
+			}, // load
+			get : function(groups, callback){
+				var group = groups.filter( function(p){
+					return (p.id === id);
+				});
+				callback(angular.copy(group[0]));
+			}, // get
+			delete : function(id){
+				var deferred = $q.defer();
+				$http({method:'DELETE', url:'api/v1/index.cfm/group/'+id}).success(function(){	
+					deferred.resolve('Delete Successful');
+				}).error(function(data){ 
+					deferred.reject({message:"delete failed", name:"exception"}); 
+				});
+				return deferred.promise;
+			}, //delete
+			add : function(dataPOST){
+				var deferred = $q.defer();
+				$http({method:'POST', url:'api/v1/index.cfm/groups', data:dataPOST }).success(function(){	
+					deferred.resolve('Add Successful');
+				}).error(function(){ 
+					deferred.reject({message:"submit failed", name:"exception"}); 
+				});
+				return deferred.promise;
+			},	
+			update : function(id, dataPOST) {
+				var deferred = $q.defer();
+				$http({method:'PUT', url:'api/v1/index.cfm/group/' + id, data:dataPOST }).success(function(){	
+					deferred.resolve('Update Successful');
+				}).error(function(data){ 
+					deferred.reject({message:"update failed", name:"exception"}); 
+				});
+				return deferred.promise;
+			}	// update
 		}; // groups
 
 	return groups;

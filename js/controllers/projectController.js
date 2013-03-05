@@ -10,10 +10,12 @@ function projectCtrl( $scope, projects ){
 
 	$scope.deleteProject = function(id){
 		try{
-			projects.delete(id);
-			projects.load(function(response){
-				model.projects = response; 
-			});
+			projects.delete(id)
+				.then(function(){
+					projects.load(function(response){
+						model.projects = response; 
+					}); })
+				.then(function(){ $scope.resetProject(); });
 
 		} catch (e) {
 			alert(e.message);
@@ -32,10 +34,12 @@ function projectCtrl( $scope, projects ){
 		var dataPOST = angular.copy(model.project);
 
 		try{
-			projects.add(dataPOST);
-			projects.load(function(response){
-				model.projects = response; 
-			});
+			projects.add(dataPOST)
+				.then(function(){
+					projects.load(function(response){
+						model.projects = response; 
+					}); })
+				.then(function(){ $scope.resetProject(); });
 		} catch(e) {
 			alert(e.message);
 		}
@@ -46,10 +50,11 @@ function projectCtrl( $scope, projects ){
 		var dataPOST = angular.copy(model.project);
 
 		try{
-			projects.update( model.project.id, dataPOST)
-			projects.load(function(response){
+			projects.update( model.project.id, dataPOST).then(function(){
+				projects.load(function(response){
 					model.projects = response; 
 				});
+			});
 		} catch(e) {
 			alert(e.message); 
 		}

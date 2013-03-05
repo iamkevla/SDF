@@ -1,4 +1,4 @@
-function groupCtrl($scope, $http, groups){
+function groupCtrl($scope, groups){
 
 	var model = $scope.$parent.model;
 
@@ -7,12 +7,10 @@ function groupCtrl($scope, $http, groups){
 	});
 
 	$scope.getGroup = function(id){
-		var group = model.groups.filter( function(p){
-			return (p.id === id);
+		groups.get(model.groups,id, function(response){
+			model.group.id = response.id; 
+			model.group.groupname = response.groupname; 
 		});
-		model.group.id = group[0].id; 
-		model.group.groupname = group[0].groupname; 
-		model.group.groupname = group[0].groupname; 
 	}; // getGroup
 
 	$scope.deleteGroup = function(id){
@@ -33,23 +31,21 @@ function groupCtrl($scope, $http, groups){
 		};
 
 		if (model.group.id === '' ){
-			$http({method:'POST', url:'api/v1/index.cfm/groups', data:dataPOST })
-				.success(function(data){	
-					groups.load(function(response){
+			groups.add(dataPOST).then(function(){
+				groups.load(function(response){
 						model.groups = response;
-					});
-				}).error(function(data){ 
-					alert('submit failed') 
 				});
+			}, function(){  
+				alert('submit failed') 
+			});
 		} else {
-			$http({method:'PUT', url:'api/v1/index.cfm/group/' + model.group.id, data:dataPOST })
-				.success(function(data){	
+			groups.update( model.group.id, data:dataPOST ).then(function(){	
 					groups.load(function(response){
 						model.groups = response;
 					});
-				}).error(function(data){ 
-					alert('update failed') 
-				});
+			}, function(){
+				alert('update failed') 
+			})
 		}
 	};
 	

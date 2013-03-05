@@ -1,4 +1,4 @@
-myApp.factory('projects', function( $http ){
+myApp.factory('projects', function( $http, $q ){
 	
 	var projects = {
 			load : function(callback){
@@ -24,25 +24,31 @@ myApp.factory('projects', function( $http ){
 				callback(angular.copy(project[0]));
 			},
 			delete : function(id){
+				var deferred = $q.defer();
 				$http({method:'DELETE', url:'api/v1/index.cfm/project/' + id }).success(function(){	
-					return true;
+					deferred.resolve('Delete Successful');
 				}).error(function(data){ 
-					throw {message:"delete failed", name:"exception"}; 
+					deferred.reject({message:"delete failed", name:"exception"}); 
 				});
+				return deferred.promise;
 			},
 			add : function(dataPOST){
+				var deferred = $q.defer();
 				$http({method:'POST', url:'api/v1/index.cfm/projects', data:dataPOST }).success(function(){	
-					return true;
-					}).error(function(){ 
-						throw {message:"submit failed", name:"exception"}; 
-					});
+					deferred.resolve('Add Successful');
+				}).error(function(){ 
+					deferred.reject({message:"submit failed", name:"exception"}); 
+				});
+				return deferred.promise;
 			},	
 			update : function(id, dataPOST) {
+				var deferred = $q.defer();
 				$http({method:'PUT', url:'api/v1/index.cfm/project/' + id, data:dataPOST }).success(function(data){	
-					return true;
+					deferred.resolve('Update Successful');
 				}).error(function(data){ 
-					throw {message:"update failed", name:"exception"}; 
+					deferred.reject({message:"update failed", name:"exception"}); 
 				});
+				return deferred.promise;
 			}	
 		}; //projects
 
