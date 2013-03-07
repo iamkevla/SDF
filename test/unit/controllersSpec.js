@@ -147,7 +147,7 @@ describe('test Controllers', function(){
       scope.getProject(73);
       scope.model.project.projectname = 'Collections';
       scope.model.project.description = 'Blah Blah';
-      scope.submit();
+      scope.update();
       $httpBackend.flush();
       expect(scope.model.projects[2]).toEqualData({ id : 73, projectname : 'Collections', description : 'Blah Blah', parentid : null, dbserver : null, dbname : null });
     });
@@ -178,7 +178,10 @@ describe('test Controllers', function(){
       $httpBackend.expectDELETE( baseAPI + 'project/2' ).respond(201, '');
       $httpBackend.expectGET( baseAPI + 'projects').respond( mockDeletedProjects() );
 
-      $rootScope.model = {projects:[]};
+      $rootScope.model = {
+                            projects:[],
+                            project:{}
+                          };
       scope = $rootScope.$new();
       ctrl = $controller( 'projectCtrl', { $scope: scope });
     }));

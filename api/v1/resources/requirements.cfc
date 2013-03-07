@@ -22,24 +22,31 @@
 		<cfargument name="estimate" type="string" required="false" />
 		<cfargument name="projectid"  type="string" required="false" default="" />
 
-		<!--- get GroupID --->
-		<cfstoredproc procedure="ap_getGroupID" datasource="dsSDF"  >
-			<cfprocparam cfsqltype="CF_SQL_VARCHAR" dbvarname="@groupname" value="#arguments.groupname#" >
-			<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@ProjectID" value="#val(arguments.projectid)#" >
-			<cfprocparam cfsqltype="CF_SQL_INTEGER" type="OUT" variable="GroupID" dbvarname="@ID" null="true"  >
-		</cfstoredproc>	
+		<cftry>
+			
+			<!--- get GroupID --->
+			<cfstoredproc procedure="ap_getGroupID" datasource="dsSDF"  >
+				<cfprocparam cfsqltype="CF_SQL_VARCHAR" dbvarname="@groupname" value="#arguments.groupname#" >
+				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@ProjectID" value="#val(arguments.projectid)#" >
+				<cfprocparam cfsqltype="CF_SQL_INTEGER" type="OUT" variable="GroupID" dbvarname="@ID" null="true"  >
+			</cfstoredproc>	
 
-		<cfstoredproc datasource="dsSDF" procedure="ap_insertRequirement" >
-			<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.requirement#" dbvarname="@requirement" />
-			<cfprocparam cfsqltype="CF_SQL_INTEGER" value="#groupID#" dbvarname="@GroupID" />
-			<cfprocparam cfsqltype="CF_SQL_INTEGER" value="#val(arguments.projectid)#" dbvarname="@ProjectID" />
-			<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.verb#" dbvarname="@verb" />
-			<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.noun#" dbvarname="@noun" />
-			<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.status#" dbvarname="@status" />
-			<cfif isdefined('arguments.estimate') and arguments.estimate neq "" >
-				<cfprocparam cfsqltype="cF_SQL_INTEGER" value="#arguments.estimate#" dbvarname="@estimate" />
-			</cfif>	
-		</cfstoredproc>	
+			<cfstoredproc datasource="dsSDF" procedure="ap_insertRequirement" >
+				<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.requirement#" dbvarname="@requirement" />
+				<cfprocparam cfsqltype="CF_SQL_INTEGER" value="#groupID#" dbvarname="@GroupID" />
+				<cfprocparam cfsqltype="CF_SQL_INTEGER" value="#val(arguments.projectid)#" dbvarname="@ProjectID" />
+				<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.verb#" dbvarname="@verb" />
+				<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.noun#" dbvarname="@noun" />
+				<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.status#" dbvarname="@status" />
+				<cfif isdefined('arguments.estimate') and arguments.estimate neq "" >
+					<cfprocparam cfsqltype="cF_SQL_INTEGER" value="#arguments.estimate#" dbvarname="@estimate" />
+				</cfif>	
+			</cfstoredproc>	
+
+		<cfcatch type="any" >
+			<cfreturn representationOf('').withStatus(400) />	
+		</cfcatch>
+		</cftry>
 
 		<cfreturn representationOf('').withStatus(200) />		
 

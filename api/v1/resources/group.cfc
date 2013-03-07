@@ -1,4 +1,3 @@
-	
 <cfcomponent extends="taffy.core.resource" taffy:uri="/group/{id}" hint="get Collection of groupss">
 
 	<cffunction name="PUT" access="public" output="false" hint="update group">
@@ -7,6 +6,7 @@
 
 		<cfset var q = "" />
 		
+		<cftry>
 		<cfstoredproc datasource="dsSDF" procedure="ap_editGroup" >
 			<cfprocparam cfsqltype="cF_SQL_INTEGER"  value="#arguments.id#" dbvarname="@id" />
 			<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.groupname#" dbvarname="@groupname"  />
@@ -16,6 +16,11 @@
 				<cfprocparam cfsqltype="CF_SQL_VARCHAR" value="#arguments.projectID#" dbvarname="@ProjectID"  />
 			</cfif>
 		</cfstoredproc>
+
+		<cfcatch type="any" >
+			<cfreturn representationOf('').withStatus(400) />	
+		</cfcatch>
+		</cftry>
 
 		<cfreturn representationOf('').withStatus(200) />		
 

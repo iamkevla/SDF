@@ -1,6 +1,6 @@
 <div id="introduction" >
 	<form name="myForm" >
-		<select ng-model="model.project" ng-change="load()" ng-options="p as p.projectname for p in model.projects" />
+		<select ng-model="model.project" ng-change="loadData()" ng-options="p as p.projectname for p in model.projects" />
 	</form>
 </div>	
 <div id="rightside" >
@@ -24,7 +24,9 @@
 <div id="leftside" >
 	<h5>New Requirements</h5>
 		
-
+	<pre>{{model.statistics|json}}</pre>
+	<pre>{{model.newCounts|json}}</pre>
+	<pre>{{model.changedCounts|json}}</pre>
 	
 	
 	<!---cfchart format="jpg" chartheight="200" chartwidth="500" showxgridlines="no" showygridlines="yes" 

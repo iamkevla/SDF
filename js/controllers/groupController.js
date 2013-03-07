@@ -1,3 +1,5 @@
+'use strict';
+
 function groupCtrl($scope, groups){
 
 	var model = $scope.$parent.model;

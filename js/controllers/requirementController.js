@@ -1,6 +1,6 @@
 'use strict';
 
-function requirementCtrl( $scope, $http, groups ){
+function requirementCtrl( $scope, groups, requirements ){
 
 	var model = $scope.$parent.model;
 
@@ -11,30 +11,15 @@ function requirementCtrl( $scope, $http, groups ){
 	};
 
 	var loadStatus = function() {
-		model.status= [];
-		$http({method:'GET', url:'api/v1/index.cfm/status'}).success(function(data){	
-			angular.forEach(data.DATA, function(items){
-				model.status.push({ 'status': items[0] });
-			});
+		requirements.loadStatus(function(response){
+			model.status = response;
 		});
 	}();
 
 
 	function loadRequirements() {
-		model.requirements= [];
-		$http({method:'GET', url:'api/v1/index.cfm/project/' + model.requirement.projectid + '/requirements'}).success(function(data){	
-			angular.forEach(data.DATA, function(items){
-				model.requirements.push({ 
-					'id': items[0],
-					'groupname': items[2],
-					'requirement': items[3],
-					'projectID':items[4],
-					'verb': items[5],
-					'noun': items[6],
-					'status': items[9],
-					'estimate': items[10]
-				});
-			});
+		requirements.loadRequirements( model.requirement.projectid, function(response){
+			model.requirements = response;
 		});
 	};
 	loadRequirements();
@@ -59,13 +44,15 @@ function requirementCtrl( $scope, $http, groups ){
 	}; // getRequirement
 
 	$scope.deleteRequirement = function(id){
-		$http({method:'DELETE', url:'api/v1/index.cfm/requirement/'+id}).success(function(){	
+		requirements.delete(id).then(function(){
+			loadRequirements();
 			groups.load(function(response){
 				model.groups = response;
 			});
-		}).error(function(data){ 
-			alert('delete failed') 
+		}, function(){
+			alert(e.message); 
 		});
+
 	};
 
 	function resetRequirement(){
@@ -91,30 +78,20 @@ function requirementCtrl( $scope, $http, groups ){
 		};
 
 		if (model.requirement.id === '' ){
-			$http({method:'POST', url:'api/v1/index.cfm/project/' + model.requirement.projectid + '/requirements', data:dataPOST })
-				.success(function(data){	
+			requirements.submit( model.requirement.projectid, dataPOST )
+				.then(function(){
 					loadRequirements();
-
-				}).error(function(data){ 
-					alert('submit failed') 
+				}, function(){
+					alert(e.message) 
 				});
 		} else {
-			$http({method:'PUT', url:'api/v1/index.cfm/requirement/' + model.requirement.id, data:dataPOST })
-				.success(function(data){	
+			requirements.update(model.requirement.id, dataPOST )
+				.then(function(){
 					loadRequirements();
 					resetRequirement();
-				}).error(function(data){ 
-					alert('update failed') 
+				}, function(){
+					alert(e.message); 
 				});
 		}
-	};
-
-	$scope.update = function( event, ui ) {
-		$http({ 
-			method: 'PUT',
-			url: 'api/v1/index.cfm/requirement/' + ui.item.attr('data-id'),
-			data: { infrontof: ui.item.next().attr('data-id') }
-		});
-    };
-	
+	};	
 } // requirementCtrl

@@ -37,10 +37,17 @@
 	</cffunction>
 
 	<cffunction name="DELETE" access="public" output="false" hint="delete project">
-		
-		<cfstoredproc datasource="dsSDF" procedure="ap_deleteProject" >
-			<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@id" value="#arguments.id#" > 	    
-		</cfstoredproc>
+
+		<cftry>
+			
+			<cfstoredproc datasource="dsSDF" procedure="ap_deleteProject" >
+				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@id" value="#arguments.id#" > 	    
+			</cfstoredproc>
+
+		<cfcatch type="any" >
+			<cfreturn representationOf('').withStatus(400) />	
+		</cfcatch>
+		</cftry>
 
 		<cfreturn representationOf('').withStatus(200) />		
 

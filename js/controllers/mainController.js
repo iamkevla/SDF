@@ -1,4 +1,6 @@
-function mainCtrl($scope, $http, projects){
+'use strict';
+
+myApp.controller('mainCtrl', function($scope, $http, projects){
 
 	var model = {
 		projects:[],
@@ -34,4 +36,4 @@ function mainCtrl($scope, $http, projects){
 	
 	$scope.model = model;
 
-}
+});

@@ -4,9 +4,16 @@
 
 		<cfset var q = "" />
 		
-		<cfquery datasource="dsSDF" name="q" >
-			select [status] from tblStatus with (nolock) order by ID asc;
-		</cfquery>
+		<cftry>
+
+			<cfquery datasource="dsSDF" name="q" >
+				select [status] from tblStatus with (nolock) order by ID asc;
+			</cfquery>
+
+		<cfcatch type="any" >
+			<cfreturn representationOf('').withStatus(400) />	
+		</cfcatch>
+		</cftry>
 
 		<cfreturn representationOf(q).withStatus(200) />		
 

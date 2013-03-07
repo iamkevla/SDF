@@ -1,3 +1,5 @@
+'use strict';
+
 myApp.factory('groups', function( $http, $q ){
 	
 	var groups = {
@@ -15,9 +17,9 @@ myApp.factory('groups', function( $http, $q ){
 				}); // http
 				callback(groups);
 			}, // load
-			get : function(groups, callback){
-				var group = groups.filter( function(p){
-					return (p.id === id);
+			get : function(groups, id, callback){
+				var group = groups.filter( function(g){
+					return (g.id === id);
 				});
 				callback(angular.copy(group[0]));
 			}, // get

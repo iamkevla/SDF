@@ -1,3 +1,5 @@
+'use strict';
+
 myApp.directive("stars", function () {
     return {
         restrict:"E",

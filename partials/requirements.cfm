@@ -27,13 +27,13 @@
 		<div class="control-group span5" >
 			<label class="control-label" >Verb:</label>
 			<div class="controls" >
-				<input type="text" ng-model="model.requirement.verb" size="20" >
+				<input type="text" ng-model="model.requirement.verb" size="20" />
 			</div>
 		</div>	
 		<div class="control-group span5" >
 			<label class="control-label" >Noun:</label>
 			<div class="controls" >
-				<input type="text" ng-model="model.requirement.noun" size="20" >				
+				<input type="text" ng-model="model.requirement.noun" size="20" />				
 			</div>
 		</div>
 	</div>	
@@ -65,7 +65,7 @@
 		<th><span class="green" >Requirement</span></th>
 		<th colspan="2" >&nbsp</th>
 	</tr>	
-	<tbody class="content" ui-sortable="{update:update , axis:'y'}"  >	
+	<tbody class="content" sortable >	
 		<tr ng-repeat="r in model.requirements" class="item" data-id="{{r.id}}"  >
 			<td>{{r.id}}</td>
 			<td>{{r.groupname}}</td>

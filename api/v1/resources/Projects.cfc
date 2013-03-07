@@ -3,10 +3,17 @@
 	<cffunction name="GET" access="public" output="false" hint="get Collection of project">
 
 		<cfset var q = "" />
+
+		<cftry>
 		
-		<cfstoredproc datasource="dsSDF" procedure="ap_getProjects">
-			<cfprocresult name="q">
-		</cfstoredproc>
+			<cfstoredproc datasource="dsSDF" procedure="ap_getProjects">
+				<cfprocresult name="q">
+			</cfstoredproc>
+
+		<cfcatch type="any" >
+			<cfreturn representationOf('').withStatus(400) />	
+		</cfcatch>
+		</cftry>
 
 		<cfreturn representationOf(q).withStatus(200) />		
 
@@ -17,15 +24,22 @@
 		<cfargument name="description" type="string" required="true" />
 		<cfargument name="parentid"  type="string" required="false" default="" />
 
-		<cfstoredproc datasource="dsSDF" procedure="ap_insertProject" >
-			<cfprocparam cfsqltype="CF_SQL_VARCHAR" dbvarname="@ProjectName" value="#arguments.projectname#" />
-			<cfprocparam cfsqltype="cF_SQL_VARCHAR" dbvarname="@description" value="#arguments.description#" />
-			<cfif arguments.parentid eq "">
-				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@parentid" null="true"  />
-			<cfelse>	
-				<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@parentid" value="#arguments.parentid#" />
-			</cfif>
-		</cfstoredproc>	
+		<cftry>
+
+			<cfstoredproc datasource="dsSDF" procedure="ap_insertProject" >
+				<cfprocparam cfsqltype="CF_SQL_VARCHAR" dbvarname="@ProjectName" value="#arguments.projectname#" />
+				<cfprocparam cfsqltype="cF_SQL_VARCHAR" dbvarname="@description" value="#arguments.description#" />
+				<cfif arguments.parentid eq "">
+					<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@parentid" null="true"  />
+				<cfelse>	
+					<cfprocparam cfsqltype="CF_SQL_INTEGER" dbvarname="@parentid" value="#arguments.parentid#" />
+				</cfif>
+			</cfstoredproc>	
+
+		<cfcatch type="any" >
+			<cfreturn representationOf('').withStatus(400) />	
+		</cfcatch>
+		</cftry>
 
 		<cfreturn representationOf('').withStatus(200) />		
 

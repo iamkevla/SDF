@@ -28,8 +28,10 @@
 	 	<script src="js/filters/main.js" ></script>
 	 	<script src="js/services/projects.js" ></script>
 	 	<script src="js/services/groups.js" ></script>
+	 	<script src="js/services/requirements.js" ></script>
 	 	<script src="https://raw.github.com/angular-ui/angular-ui/master/build/angular-ui.min.js"></script>
 	 	<script src="js/jquery-ui-1.10.1.custom.min.js"></script>
 	 	<script src="js/directives/stars.js" ></script>
+	 	<script src="js/directives/sortable.js" ></script>
 	</body>
 </html>

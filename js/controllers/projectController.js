@@ -1,3 +1,5 @@
+'use strict';
+
 function projectCtrl( $scope, projects ){
 
 	var model = $scope.$parent.model;

@@ -1,3 +1,5 @@
+'use strict';
+
 myApp.factory('projects', function( $http, $q ){
 	
 	var projects = {
