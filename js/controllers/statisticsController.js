@@ -1,9 +1,11 @@
 'use strict';
 
-function statisticsCtrl($scope, $http){
+function statisticsCtrl($scope, $http, $q){
 
 	var model = $scope.$parent.model;
 
+	model.newCounts = [];
+	model.changedCounts = [];
 
 	function load(){
 		model.statistics = [];
@@ -17,13 +19,13 @@ function statisticsCtrl($scope, $http){
 								"errorcount": items[4],
 								"starttime": items[5],
 								"stoptime": items[6]
-				 });
+				});
 			});
 		});
 	};
 
-
 	function newCounts(){
+		var deferred = $q.defer();
 		model.newCounts = [];
 		$http({
 			method:'GET', 
@@ -32,17 +34,17 @@ function statisticsCtrl($scope, $http){
 				'?dbname=' + model.project.projectname +
 				'&method=new'
 			}).success(function(data){	
-			angular.forEach(data.DATA, function(items){
-				model.newCounts.push({ 
-								"sumreq" : items[0],
-								"dayreq": items[1],
-								"projectname": items[2]
-				 });
-			});
-		});
+				angular.forEach(data.DATA, function(items){
+					model.newCounts.push( [(new Date(items[1])).getTime(), items[0] ]);
+				}); //forEach
+			deferred.resolve();	
+		}); //http
+		return deferred.promise;	
 	};
 
+
 	function newChanged(){
+		var deferred = $q.defer();
 		model.changedCounts = [];
 		$http({
 			method:'GET', 
@@ -51,23 +53,50 @@ function statisticsCtrl($scope, $http){
 				'?dbname=' + model.project.projectname +
 				'&method=changed'
 			}).success(function(data){	
-			angular.forEach(data.DATA, function(items){
-				model.changedCounts.push({ 
-								"sumreq" : items[0],
-								"dayreq": items[1],
-								"projectname": items[2]
-				 });
-			});
+				angular.forEach(data.DATA, function(items){
+					model.changedCounts.push( [(new Date(items[1])).getTime(), items[0] ]);
+				});
+			deferred.resolve();
+		});
+		return deferred.promise;
+	};
+
+	var startDate = new Date();
+	startDate.setDate(startDate.getDate()-7);
+
+	model.opts = { 
+		xaxis: {
+			mode: "time",
+			minTickSize: [1, "day"],
+			min: startDate.getTime(),
+			max: (new Date()).getTime(),
+			timeformat: "%a",
+			timezone: "browser",
+			stack:0,
+			bars: { show: true }
+		}
+	};
+	model.data = [];
+
+
+	$scope.loadData = function(){
+		load();
+		$q.all([newCounts(), newChanged()]).then(function(){
+
+			model.data = [ 
+				{ 
+					label: "New", 
+					data: model.newCounts	
+				},
+		  		{ 
+		  			label: "Changed", 
+		  			data: model.changedCounts
+		  		}
+		  	]; 
 		});
 	};
 
 	$scope.model = model;
-
-	$scope.loadData = function(){
-		load();
-		newCounts();
-		newChanged();
-	};
 
 
 } // statisticsCtrl

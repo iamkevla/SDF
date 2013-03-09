@@ -14,6 +14,7 @@ myApp.directive("sortable", function($http){
 		restrict: "A",
 		link: function(scope, element, attrs){
 			element.sortable({
+				cursor: 'move',
     			update: update,
     			axis: 'y'
 			});
@@ -21,4 +22,3 @@ myApp.directive("sortable", function($http){
 	}; //return
 
 }); // directive sortable
-

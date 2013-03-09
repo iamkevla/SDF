@@ -20,7 +20,9 @@ files = [
 
 // list of files to exclude
 exclude = [
-  'js/jquery-ui-1.10.1.custom.min.js'
+  'js/jquery-ui-1.10.1.custom.min.js',
+  'js/bootstrap.min.js',
+  'js/jquery.flot.js'
 ];
 
 

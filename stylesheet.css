@@ -111,3 +111,8 @@ ul.rate li.selected {
 ul.rate li.hovered {
     background-position:0 -64px;
 }
+chart {
+    display:none;
+    width:400px;
+    height:200px;
+}​

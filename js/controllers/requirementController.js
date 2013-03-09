@@ -43,6 +43,7 @@ function requirementCtrl( $scope, groups, requirements ){
 		//model.requirement.projectid = requirement[0].projectid; 
 	}; // getRequirement
 
+
 	$scope.deleteRequirement = function(id){
 		requirements.delete(id).then(function(){
 			loadRequirements();
@@ -63,7 +64,11 @@ function requirementCtrl( $scope, groups, requirements ){
 		model.requirement.noun = ''; 
 		model.requirement.status = ''; 
 		model.requirement.estimate = ''; 
-	}				
+	}	
+
+	$scope.resetRequirement = function(){
+		return resetRequirement();	
+	};				
 
 	$scope.submitRequirement = function(){
 		var dataPOST = {
@@ -81,6 +86,7 @@ function requirementCtrl( $scope, groups, requirements ){
 			requirements.submit( model.requirement.projectid, dataPOST )
 				.then(function(){
 					loadRequirements();
+					resetRequirement();
 				}, function(){
 					alert(e.message) 
 				});
