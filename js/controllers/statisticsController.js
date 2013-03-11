@@ -64,6 +64,8 @@ function statisticsCtrl($scope, $http, $q){
 	var startDate = new Date();
 	startDate.setDate(startDate.getDate()-7);
 
+	var stack = true, bars = true;
+
 	model.opts = { 
 		xaxis: {
 			mode: "time",
@@ -71,9 +73,11 @@ function statisticsCtrl($scope, $http, $q){
 			min: startDate.getTime(),
 			max: (new Date()).getTime(),
 			timeformat: "%a",
-			timezone: "browser",
-			stack:0,
-			bars: { show: true }
+			timezone: "browser"
+		},
+		series: {
+			stack: stack,
+			bars: {show: bars, barWidth: 10.0 }
 		}
 	};
 	model.data = [];
@@ -86,7 +90,7 @@ function statisticsCtrl($scope, $http, $q){
 			model.data = [ 
 				{ 
 					label: "New", 
-					data: model.newCounts	
+					data: model.newCounts
 				},
 		  		{ 
 		  			label: "Changed", 

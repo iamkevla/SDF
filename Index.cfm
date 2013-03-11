@@ -21,6 +21,7 @@
 	 	<script src="js/jquery-ui-1.10.1.custom.min.js"></script>
 	 	<script src="https://raw.github.com/flot/flot/master/jquery.flot.js"></script>
 	 	<script src="https://raw.github.com/flot/flot/master/jquery.flot.time.js"></script>
+	 	<script src="https://raw.github.com/flot/flot/master/jquery.flot.stack.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js" ></script>
 		<script src="https://raw.github.com/angular-ui/angular-ui/master/build/angular-ui.min.js"></script>
 		<script src="js/app.js" ></script>

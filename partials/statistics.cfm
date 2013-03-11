@@ -32,10 +32,4 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span10" >
-			<pre>{{model.newCounts|json}}</pre>
-			<pre>{{model.changedCounts|json}}</pre>
-		</div>	
-	</div>	
 </div>
