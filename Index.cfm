@@ -37,5 +37,6 @@
 	 	<script src="js/directives/stars.js" ></script>
 	 	<script src="js/directives/sortable.js" ></script>
 	 	<script src="js/directives/flot.js" ></script>
+	 	<script src="js/directives/typeahead.js" ></script>
 	</body>
 </html>

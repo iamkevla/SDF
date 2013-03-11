@@ -24,9 +24,16 @@ function requirementCtrl( $scope, groups, requirements ){
 	};
 	loadRequirements();
 
+	groups.typeahead( model.requirement.projectid, function(response){
+		model.typeahead =  response;
+	});
+
 	$scope.changeProject = function(){
 		loadRequirements();
 		resetRequirement();
+		groups.typeahead( model.requirement.projectid, function(response){
+			model.typeahead =  response;
+		});
 	};
 
 	$scope.getRequirement = function(id){

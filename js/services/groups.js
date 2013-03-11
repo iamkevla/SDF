@@ -17,6 +17,17 @@ myApp.factory('groups', function( $http, $q ){
 				}); // http
 				callback(groups);
 			}, // load
+			typeahead : function( projectid, callback){
+				var typeahead = [];
+				$http({method:'GET', url:'api/v1/index.cfm/groups'}).success(function(data){	
+					angular.forEach(data.DATA, function(items){
+						if( projectid == items[2] ) {
+							typeahead.push( items[1] ); 
+						} //if
+					}); //angular.forEach
+				}); // http
+				callback( typeahead );
+			}, // tyepahead
 			get : function(groups, id, callback){
 				var group = groups.filter( function(g){
 					return (g.id === id);

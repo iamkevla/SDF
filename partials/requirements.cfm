@@ -33,7 +33,7 @@
 			<div class="control-group span5" >	
 				<label class="control-label" >Requirement Group:</label>
 				<div class="controls" >
-					<input type="text" ng-model="model.requirement.groupname" required="true" message="This is a required field..">
+					<input type="text" ng-model="model.requirement.groupname" required="true" message="This is a required field.." bs-typeahead="model.typeahead" >
 				</div>
 			</div>	
 		</div>
@@ -42,7 +42,7 @@
 				<label class="control-label" >Requirement:</label>
 				<div class="controls" >
 					<textarea ng-model="model.requirement.requirement"  required="true" cols="80" class="span8"></textarea>
-					<a ng-click="toggleShowhide()" >Show/Hide</a>
+					<a ng-click="toggleShowhide()" >Show/Hide</a> 
 				</div>
 			</div>
 		</div>	
