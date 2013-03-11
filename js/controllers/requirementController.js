@@ -10,12 +10,6 @@ function requirementCtrl( $scope, groups, requirements ){
 		model.showhide = !model.showhide;
 	};
 
-	var loadStatus = function() {
-		requirements.loadStatus(function(response){
-			model.status = response;
-		});
-	}();
-
 
 	function loadRequirements() {
 		requirements.loadRequirements( model.requirement.projectid, function(response){
@@ -27,6 +21,12 @@ function requirementCtrl( $scope, groups, requirements ){
 	groups.typeahead( model.requirement.projectid, function(response){
 		model.typeahead =  response;
 	});
+
+	var loadStatus = function() {
+		requirements.loadStatus(function(response){
+			model.status = response;
+		});
+	}();
 
 	$scope.changeProject = function(){
 		loadRequirements();
