@@ -22,7 +22,9 @@ files = [
 exclude = [
   'js/jquery-ui-1.10.1.custom.min.js',
   'js/bootstrap.min.js',
-  'js/jquery.flot.js'
+  'js/jquery.flot.js',
+  'js/jquery.flot.stack.js',
+  'js/jquery.flot.time.js'
 ];
 
 
@@ -70,3 +72,8 @@ captureTimeout = 60000;
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = true;
+
+junitReporter: {
+  // will be resolved to basePath (in the same way as files/exclude patterns)
+  outputFile: 'test-results.xml'
+};
