@@ -25,7 +25,7 @@ myApp.factory('projects', function( $http, $q ){
 				});
 				callback(angular.copy(project[0]));
 			},
-			delete : function(id){
+			'delete' : function(id){
 				var deferred = $q.defer();
 				$http({method:'DELETE', url:'api/v1/index.cfm/project/' + id }).success(function(){	
 					deferred.resolve('Delete Successful');

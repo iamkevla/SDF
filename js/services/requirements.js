@@ -30,7 +30,7 @@ myApp.factory('requirements', function( $http, $q ){
 				callback(requirements);
 			});
 		},
-		delete: function(id){
+		"delete": function(id){
 			var deferred = $q.defer();
 			$http({method:'DELETE', url:'api/v1/index.cfm/requirement/'+ id }).success(function(){	
 				deferred.resolve('Delete Successful');

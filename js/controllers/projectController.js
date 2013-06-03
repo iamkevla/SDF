@@ -12,7 +12,7 @@ function projectCtrl( $scope, projects ){
 
 	$scope.deleteProject = function(id){
 		try{
-			projects.delete(id)
+			projects['delete'](id)
 				.then(function(){
 					projects.load(function(response){
 						model.projects = response; 

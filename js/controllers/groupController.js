@@ -16,7 +16,7 @@ function groupCtrl($scope, groups){
 	}; // getGroup
 
 	$scope.deleteGroup = function(id){
-		groups.delete(id).then(function(){	
+		groups['delete'](id).then(function(){	
 			groups.load(function(response){
 				model.groups = response;
 			});

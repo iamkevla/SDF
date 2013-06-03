@@ -52,7 +52,7 @@ function requirementCtrl( $scope, groups, requirements ){
 
 
 	$scope.deleteRequirement = function(id){
-		requirements.delete(id).then(function(){
+		requirements['delete'](id).then(function(){
 			loadRequirements();
 			groups.load(function(response){
 				model.groups = response;

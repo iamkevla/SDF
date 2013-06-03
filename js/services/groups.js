@@ -34,7 +34,7 @@ myApp.factory('groups', function( $http, $q ){
 				});
 				callback(angular.copy(group[0]));
 			}, // get
-			delete : function(id){
+			'delete' : function(id){
 				var deferred = $q.defer();
 				$http({method:'DELETE', url:'api/v1/index.cfm/group/'+id}).success(function(){	
 					deferred.resolve('Delete Successful');
