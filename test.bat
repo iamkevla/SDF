@@ -1,1 +1,1 @@
-karma start "testacular.conf.js"
+karma start "karma.conf.js"
