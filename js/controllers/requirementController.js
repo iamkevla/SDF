@@ -14,6 +14,8 @@ function requirementCtrl( $scope, groups, requirements ){
 	function loadRequirements() {
 		requirements.loadRequirements( model.requirement.projectid, function(response){
 			model.requirements = response;
+
+			model.project = model.projects.filter(function (item) { return (item.id===model.requirement.projectid);});
 		});
 	};
 	loadRequirements();

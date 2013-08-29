@@ -23,7 +23,7 @@ describe('myApp', function() {
     });
 
     it(' should be able to click readme to get for details', function(){
-      expect(element('[ng-view] div[ng-show="showIntro"]').attr('style')).toBe("display: none;");
+      expect(element('[ng-view] div[ng-show="showIntro"]').attr('style')).toBe("display:none");
       element('[ng-view] a.readm:first').click();
       expect(element('[ng-view] div[ng-show="showIntro"]').attr('style')).toBe("");
     });

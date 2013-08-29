@@ -10,7 +10,7 @@
 				requirements. Finally it should be intuitive and amazingly simple and fun to use. 
 				<a class="readm" ng-click="showIntro = !showIntro" >Read more...</a>
 			</p>
-			<div ng-show="showIntro" >
+			<div ng-show="showIntro" ng-animate=" 'animate' " style="display:none" >
 				<p> It is somewhat based on Agile development methodology where the customer is involved in 
 				creating "user stories" (Requirements) and prioritising them to before they are worked on by developers. 
 				A "user story" is a simple statement about what a user wants to do with a feature of the software. This 
@@ -42,7 +42,7 @@
 			feature duplication.<br />
 			<a class="readm" ng-click="showFeature = !showFeature">Read more...</a>
 			</p>
-			<div ng-show="showFeature" >
+			<div ng-show="showFeature" ng-animate=" 'animate' "  style="display:none" >
 				<p> Each feature block is cross-referenced at all times with the requirements and are named 
 				using verbNoun usage captured with the Requirement. Feature blocks are marked with relative complexity (Easy, Medium, Complex & Special Case ).</p>
 				<p><strong>Definitions</strong></p>
@@ -61,7 +61,7 @@
 			<p>	This tool allows you to create new projects which your requirements can be associated to. 
 			Requirements can be further categorised using <strong>Groupings</strong>. A project should cover the development or enhancement of a single solution while a Grouping will be limited to a functional area. 
 			<a class="readm" ng-click="showProject = !showProject" >Read more...</a></p>
-			<div ng-show="showProject" >
+			<div ng-show="showProject" ng-animate=" 'animate' "  style="display:none" >
 				<p> While it may at times be difficult to review the entire system Requirements for a given Project
  				in one go the Groupings allow you to focus on specific areas of related Requirements.</p>
 				<p> Finally, the Framework allows for the association of Projects so that if you have a Programme

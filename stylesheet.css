@@ -111,8 +111,57 @@ ul.rate li.selected {
 ul.rate li.hovered {
     background-position:0 -64px;
 }
+
 chart {
     display:none;
     width:400px;
     height:200px;
-}​
+}
+
+
+.animate-show-setup {
+    -webkit-transition: 1s linear all; /* Safari/Chrome */
+       -moz-transition: 1s linear all; /* Firefox */
+        -ms-transition: 1s linear all; /* IE10 */
+         -o-transition: 1s linear all; /* Opera */
+            transition: 1s linear all; /* Future Browsers */
+
+    opacity: 0;
+    line-height: 0;
+}
+ 
+.animate-show-setup.animate-show-start {
+    opacity: 1;
+    line-height: 100%;
+}
+
+.animate-hide-setup {
+    -webkit-transition: 1s linear all; /* Safari/Chrome */
+       -moz-transition: 1s linear all; /* Firefox */
+        -ms-transition: 1s linear all; /* IE10 */
+         -o-transition: 1s linear all; /* Opera */
+            transition: 1s linear all; /* Future Browsers */
+ 
+    opacity: 1;
+    line-height:100%;
+}
+ 
+.animate-hide-setup.animate-hide-start {
+    opacity: 0;
+    line-height:0;
+}
+
+.slide-enter-setup {
+    -webkit-transition: 0.5s linear all; /* Safari/Chrome */
+       -moz-transition: 0.5s linear all; /* Firefox */
+        -ms-transition: 0.5s linear all; /* IE10 */
+         -o-transition: 0.5s linear all; /* Opera */
+            transition: 0.5s linear all; /* Future Browsers */
+    
+    position:relative;
+    left: 800px;
+}
+ 
+.slide-enter-setup.slide-enter-start {
+    left:0;
+}
